@@ -7,7 +7,7 @@ import os
 import pickle
 import tensorflow as tf
 import numpy as np
-
+import tempfile
 
 def one_hot(labels):
     """this creates a one hot encoding from a flat vector:
@@ -151,8 +151,8 @@ def train_and_validate(x_train, y_train, x_valid, y_valid, num_epochs, lr, num_f
         learning_curve[i] = 1 - accuracy.eval(feed_dict={x_image:x_valid, y_:y_valid})
         print("step %d, training accuracy %g"%(i, train_accuracy))
         # print("step %d, validation accuracy %g"%(i, learning_curve))
-
-    save_path = saver.save(sess, './model.ckpt')
+    temp = tempfile.NamedTemporaryFile()
+    save_path = saver.save(sess, './model/'+ temp +'.ckpt')
     print("Model saved in path: %s" % save_path)
     return learning_curve, save_path  # TODO: Return the validation error after each epoch (i.e learning curve) and your model
 
