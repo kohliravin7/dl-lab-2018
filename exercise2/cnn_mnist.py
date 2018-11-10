@@ -5,7 +5,7 @@ import gzip
 import json
 import os
 import pickle
-
+import tensorflow as tf
 import numpy as np
 
 
@@ -60,14 +60,118 @@ def mnist(datasets_dir='./data'):
     return train_x, one_hot(train_y), valid_x, one_hot(valid_y), test_x, one_hot(test_y)
 
 
-def train_and_validate(x_train, y_train, x_valid, y_valid, num_epochs, lr, num_filters, batch_size):
+sess = tf.InteractiveSession()
+x_image = tf.placeholder(tf.float32, [None, 28,28,1], name='x')
+y_ = tf.placeholder(tf.float32, [None, 10], name='y_')
+# x_image = tf.reshape(x, [-1, 28, 28, 1])
+y_pred = tf.placeholder(tf.float32, [None, 10])
+# def weight_variable(shape):
+#   weight = tf.truncated_normal(shape, stddev=0.1)
+#   return tf.Variable(weight)
+
+# def bias_variable(shape):
+#   bias = tf.constant(0.1, shape=shape)
+#   return tf.Variable(bias)
+
+
+def LeNet_3(x, lr, num_filters, filter_size):
+
+    # Convolutional Layer #1
+
+    # input_layer = tf.reshape(x, [-1, 28, 28, 1])
+
+    conv1 = tf.layers.conv2d(
+        inputs=x,
+        filters=num_filters,
+        kernel_size=[filter_size, filter_size],
+        padding="same",
+        activation=tf.nn.relu)
+
+    # Pooling Layer #1
+    pool1 = tf.layers.max_pooling2d(inputs=conv1, pool_size=[2, 2], strides=2)
+
+    # Convolutional Layer #2
+    conv2 = tf.layers.conv2d(
+        inputs=pool1,
+        filters=num_filters,
+        kernel_size=[filter_size, filter_size],
+        padding="same",
+        activation=tf.nn.relu)
+
+    # Pooling Layer #2
+    pool2 = tf.layers.max_pooling2d(inputs=conv2, pool_size=[2, 2], strides=2)
+
+    # Flatten tensor into a batch of vectors
+    pool2_flat = tf.reshape(pool2, [-1, 7 * 7 * num_filters])
+
+    # Dense Layer
+    dense = tf.layers.dense(inputs=pool2_flat, units=1024, activation=tf.nn.relu)
+
+    # Logits layer
+    y_pred = tf.layers.dense(inputs=dense, units=10)
+    
+    # y_pred = tf.nn.softmax(y_conv)
+
+    return y_pred
+
+
+def train_and_validate(x_train, y_train, x_valid, y_valid, num_epochs, lr, num_filters, batch_size, filter_size):
     # TODO: train and validate your convolutional neural networks with the provided data and hyperparameters
 
-    return learning_curve, model  # TODO: Return the validation error after each epoch (i.e learning curve) and your model
+    n_samples = x_train.shape[0]
+    n_batches = n_samples // batch_size
+    # x_split = np.array_split(x_train, n_batches)
+    # y_split = np.array_split(y_train, n_batches)
+
+    y_pred = LeNet_3(x_image, lr, num_filters, filter_size)
+    sess.run(tf.global_variables_initializer())
+
+    cross_entropy = tf.nn.sigmoid_cross_entropy_with_logits(labels=y_,logits=y_pred)
+    cross_entropy = tf.reduce_mean(cross_entropy)*100
+    train_step = tf.train.GradientDescentOptimizer(lr).minimize(cross_entropy)
+
+    correct_prediction = tf.equal(tf.argmax(y_pred,1), tf.argmax(y_,1))
+    accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32), name="accuracy")
+    
+    saver = tf.train.Saver()
+
+    learning_curve  = np.zeros(num_epochs)   
+    
+    for i in range(num_epochs):
+        
+        for b in range(n_batches):
+            x_batch = x_train[b*batch_size:(b+1)*batch_size]
+            y_batch = y_train[b*batch_size:(b+1)*batch_size]
+            
+            # y_pred_one_hot = one_hot(y_pred)
+
+            train_step.run(feed_dict={x_image: x_batch, y_: y_batch})
+
+        train_accuracy = accuracy.eval(feed_dict={x_image: x_train, y_: y_train})
+        learning_curve[i] = 1 - accuracy.eval(feed_dict={x_image:x_valid, y_:y_valid})
+        print("step %d, training accuracy %g"%(i, train_accuracy))
+        # print("step %d, validation accuracy %g"%(i, learning_curve))
+
+    save_path = saver.save(sess, './model.ckpt')
+    print("Model saved in path: %s" % save_path)
+    return learning_curve, save_path  # TODO: Return the validation error after each epoch (i.e learning curve) and your model
 
 
 def test(x_test, y_test, model):
     # TODO: test your network here by evaluating it on the test data
+    
+    graph = tf.get_default_graph()
+
+    saver = tf.train.Saver()
+
+    # Get the latest checkpoint in the directory
+    # Reload the weights into the variables of the graph
+    saver.restore(sess, model)
+    accuracy = graph.get_tensor_by_name("accuracy:0")
+    x_image = graph.get_tensor_by_name("x:0")
+    y_ = graph.get_tensor_by_name("y_:0")
+    test_error = accuracy.eval(feed_dict={x_image: x_test, y_: y_test})
+
     return test_error
 
 
@@ -78,7 +182,7 @@ if __name__ == "__main__":
     parser.add_argument("--input_path", default="./", type=str, nargs="?",
                         help="Path where the data is located. If the data is not available it will be downloaded first")
     parser.add_argument("--learning_rate", default=1e-3, type=float, nargs="?", help="Learning rate for SGD")
-    parser.add_argument("--num_filters", default=32, type=int, nargs="?",
+    parser.add_argument("--num_filters", default=16, type=int, nargs="?",
                         help="The number of filters for each convolution layer")
     parser.add_argument("--batch_size", default=128, type=int, nargs="?", help="Batch size for SGD")
     parser.add_argument("--epochs", default=12, type=int, nargs="?",
@@ -93,11 +197,11 @@ if __name__ == "__main__":
     num_filters = args.num_filters
     batch_size = args.batch_size
     epochs = args.epochs
-
+    filter_size = 3
     # train and test convolutional neural network
     x_train, y_train, x_valid, y_valid, x_test, y_test = mnist(args.input_path)
 
-    learning_curve, model = train_and_validate(x_train, y_train, x_valid, y_valid, epochs, lr, num_filters, batch_size)
+    learning_curve, model = train_and_validate(x_train, y_train, x_valid, y_valid, epochs, lr, num_filters, batch_size, filter_size)
 
     test_error = test(x_test, y_test, model)
 
@@ -106,8 +210,8 @@ if __name__ == "__main__":
     results["lr"] = lr
     results["num_filters"] = num_filters
     results["batch_size"] = batch_size
-    results["learning_curve"] = learning_curve
-    results["test_error"] = test_error
+    results["learning_curve"] = learning_curve.tolist()
+    results["test_error"] = test_error.tolist()
 
     path = os.path.join(args.output_path, "results")
     os.makedirs(path, exist_ok=True)
@@ -117,3 +221,53 @@ if __name__ == "__main__":
     fh = open(fname, "w")
     json.dump(results, fh)
     fh.close()
+
+    lrs = [0.1, 0.01, 0.001, 0.0001]
+    for i in range(len(lrs)):
+        x_train, y_train, x_valid, y_valid, x_test, y_test = mnist(args.input_path)
+
+        learning_curve, model = train_and_validate(x_train, y_train, x_valid, y_valid, epochs, lrs[i], num_filters, batch_size, filter_size)
+
+        test_error = test(x_test, y_test, model)
+
+        # save results in a dictionary and write them into a .json file
+        results = dict()
+        results["lr"] = lrs[i]
+        results["num_filters"] = num_filters
+        results["batch_size"] = batch_size
+        results["learning_curve"] = learning_curve.tolist()
+        results["test_error"] = test_error.tolist()
+
+        path = os.path.join(args.output_path, "results_learning_rates")
+        os.makedirs(path, exist_ok=True)
+
+        fname = os.path.join(path, "results_run_" + str(i+1) + ".json")
+
+        fh = open(fname, "w")
+        json.dump(results, fh)
+        fh.close()
+
+    filters = [1, 3, 5, 7]
+    for i in range(len(filters)):
+        x_train, y_train, x_valid, y_valid, x_test, y_test = mnist(args.input_path)
+
+        learning_curve, model = train_and_validate(x_train, y_train, x_valid, y_valid, epochs, lr, num_filters, batch_size, filters[i])
+
+        test_error = test(x_test, y_test, model)
+
+        # save results in a dictionary and write them into a .json file
+        results = dict()
+        results["lr"] = lr
+        results["num_filters"] = num_filters
+        results["batch_size"] = batch_size
+        results["learning_curve"] = learning_curve.tolist()
+        results["test_error"] = test_error.tolist()
+
+        path = os.path.join(args.output_path, "results_filters")
+        os.makedirs(path, exist_ok=True)
+
+        fname = os.path.join(path, "results_run_" + str(i+1) + ".json")
+
+        fh = open(fname, "w")
+        json.dump(results, fh)
+        fh.close()
