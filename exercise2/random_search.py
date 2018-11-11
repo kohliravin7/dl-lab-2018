@@ -56,7 +56,7 @@ class MyWorker(Worker):
         # x_image = tf.reshape(x, [-1, 28, 28, 1])
         y_pred = tf.placeholder(tf.float32, [None, 10])
 
-        y_pred = LeNet_3(x_image, lr, num_filters, filter_size)
+        y_pred = LeNet_3(x_image, num_filters, filter_size)
         sess.run(tf.global_variables_initializer())
 
         cross_entropy = tf.nn.sigmoid_cross_entropy_with_logits(labels=y_, logits=y_pred)

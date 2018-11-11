@@ -7,7 +7,9 @@ import os
 import pickle
 import tensorflow as tf
 import numpy as np
-import tempfile
+
+count = 0
+
 
 def one_hot(labels):
     """this creates a one hot encoding from a flat vector:
@@ -60,11 +62,7 @@ def mnist(datasets_dir='./data'):
     return train_x, one_hot(train_y), valid_x, one_hot(valid_y), test_x, one_hot(test_y)
 
 
-sess = tf.InteractiveSession()
-x_image = tf.placeholder(tf.float32, [None, 28,28,1], name='x')
-y_ = tf.placeholder(tf.float32, [None, 10], name='y_')
-# x_image = tf.reshape(x, [-1, 28, 28, 1])
-y_pred = tf.placeholder(tf.float32, [None, 10])
+
 # def weight_variable(shape):
 #   weight = tf.truncated_normal(shape, stddev=0.1)
 #   return tf.Variable(weight)
@@ -74,7 +72,7 @@ y_pred = tf.placeholder(tf.float32, [None, 10])
 #   return tf.Variable(bias)
 
 
-def LeNet_3(x, lr, num_filters, filter_size):
+def LeNet_3(x, num_filters, filter_size):
 
     # Convolutional Layer #1
 
@@ -117,60 +115,67 @@ def LeNet_3(x, lr, num_filters, filter_size):
 
 def train_and_validate(x_train, y_train, x_valid, y_valid, num_epochs, lr, num_filters, batch_size, filter_size):
     # TODO: train and validate your convolutional neural networks with the provided data and hyperparameters
+    global count
+
+    x_image = tf.placeholder(tf.float32, [None, 28, 28, 1], name='input_data')
+    y_ = tf.placeholder(tf.float32, [None, 10], name='output_data')
+    # x_image = tf.reshape(x, [-1, 28, 28, 1])
 
     n_samples = x_train.shape[0]
     n_batches = n_samples // batch_size
     # x_split = np.array_split(x_train, n_batches)
     # y_split = np.array_split(y_train, n_batches)
 
-    y_pred = LeNet_3(x_image, lr, num_filters, filter_size)
-    sess.run(tf.global_variables_initializer())
+    y_pred = LeNet_3(x_image, num_filters, filter_size)
 
     cross_entropy = tf.nn.sigmoid_cross_entropy_with_logits(labels=y_,logits=y_pred)
     cross_entropy = tf.reduce_mean(cross_entropy)*100
     train_step = tf.train.GradientDescentOptimizer(lr).minimize(cross_entropy)
 
-    correct_prediction = tf.equal(tf.argmax(y_pred,1), tf.argmax(y_,1))
-    accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32), name="accuracy")
-    
+    correct_prediction = tf.equal(tf.argmax(y_pred, 1), tf.argmax(y_, 1))
+
     saver = tf.train.Saver()
 
-    learning_curve  = np.zeros(num_epochs)   
-    
-    for i in range(num_epochs):
-        
-        for b in range(n_batches):
-            x_batch = x_train[b*batch_size:(b+1)*batch_size]
-            y_batch = y_train[b*batch_size:(b+1)*batch_size]
-            
-            # y_pred_one_hot = one_hot(y_pred)
+    with tf.Session() as sess:
+        accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32), name="accuracy")
+        sess.run(tf.global_variables_initializer())
+        learning_curve = np.zeros(num_epochs)
 
-            train_step.run(feed_dict={x_image: x_batch, y_: y_batch})
+        for i in range(num_epochs):
 
-        train_accuracy = accuracy.eval(feed_dict={x_image: x_train, y_: y_train})
-        learning_curve[i] = 1 - accuracy.eval(feed_dict={x_image:x_valid, y_:y_valid})
-        print("step %d, training accuracy %g"%(i, train_accuracy))
-        # print("step %d, validation accuracy %g"%(i, learning_curve))
-    temp = tempfile.NamedTemporaryFile()
-    save_path = saver.save(sess, './model/'+ temp +'.ckpt')
-    print("Model saved in path: %s" % save_path)
-    return learning_curve, save_path  # TODO: Return the validation error after each epoch (i.e learning curve) and your model
+            for b in range(n_batches):
+                x_batch = x_train[b*batch_size:(b+1)*batch_size]
+                y_batch = y_train[b*batch_size:(b+1)*batch_size]
+
+                train_step.run(feed_dict={x_image: x_batch, y_: y_batch})
+
+            train_accuracy = accuracy.eval(feed_dict={x_image: x_train, y_: y_train})
+            learning_curve[i] = 1 - accuracy.eval(feed_dict={x_image:x_valid, y_:y_valid})
+            print("step %d, training accuracy %g"%(i, train_accuracy))
+            # print("step %d, validation accuracy %g"%(i, learning_curve))
+        model = saver.save(sess, './models/' + str(count) + '.ckpt')
+        count += 1
+        print("Model saved in path: %s" % model)
+    return learning_curve, model  # TODO: Return the validation error after each epoch (i.e learning curve) and your model
 
 
 def test(x_test, y_test, model):
     # TODO: test your network here by evaluating it on the test data
-    
-    graph = tf.get_default_graph()
+    tf.reset_default_graph()
+    graph = tf.Graph()
 
-    saver = tf.train.Saver()
+    with tf.Session(graph=graph) as sess:
 
-    # Get the latest checkpoint in the directory
-    # Reload the weights into the variables of the graph
-    saver.restore(sess, model)
-    accuracy = graph.get_tensor_by_name("accuracy:0")
-    x_image = graph.get_tensor_by_name("x:0")
-    y_ = graph.get_tensor_by_name("y_:0")
-    test_error = accuracy.eval(feed_dict={x_image: x_test, y_: y_test})
+        saver = tf.train.import_meta_graph(model + '.meta')
+
+        # Get the latest checkpoint in the directory
+        # Reload the weights into the variables of the graph
+        saver.restore(sess, model)
+
+        accuracy = graph.get_tensor_by_name("accuracy:0")
+        x_image = graph.get_tensor_by_name("input_data:0")
+        y_ = graph.get_tensor_by_name("output_data:0")
+        test_error = 1 - accuracy.eval(feed_dict={x_image: x_test, y_: y_test})
 
     return test_error
 
