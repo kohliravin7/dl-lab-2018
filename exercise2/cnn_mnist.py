@@ -149,9 +149,9 @@ def train_and_validate(x_train, y_train, x_valid, y_valid, num_epochs, lr, num_f
 
                 train_step.run(feed_dict={x_image: x_batch, y_: y_batch})
 
-            train_accuracy = accuracy.eval(feed_dict={x_image: x_train, y_: y_train})
+            # train_accuracy = accuracy.eval(feed_dict={x_image: x_train, y_: y_train})
             learning_curve[i] = 1 - accuracy.eval(feed_dict={x_image:x_valid, y_:y_valid})
-            print("step %d, training accuracy %g"%(i, train_accuracy))
+            print("step %d, training accuracy %g"%(i, learning_curve[i]))
             # print("step %d, validation accuracy %g"%(i, learning_curve))
         model = saver.save(sess, './models/' + str(count) + '.ckpt')
         count += 1
