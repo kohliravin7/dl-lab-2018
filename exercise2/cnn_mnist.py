@@ -276,3 +276,33 @@ if __name__ == "__main__":
         fh = open(fname, "w")
         json.dump(results, fh)
         fh.close()
+
+    # hyperparameters
+    lr = 0.015909904708889904
+    num_filters = 57
+    batch_size = 33
+    epochs = args.epochs
+    filter_size = 3
+    # train and test convolutional neural network
+    x_train, y_train, x_valid, y_valid, x_test, y_test = mnist(args.input_path)
+
+    learning_curve, model = train_and_validate(x_train, y_train, x_valid, y_valid, epochs, lr, num_filters, batch_size, filter_size)
+
+    test_error = test(x_test, y_test, model)
+
+    # save results in a dictionary and write them into a .json file
+    results = dict()
+    results["lr"] = lr
+    results["num_filters"] = num_filters
+    results["batch_size"] = batch_size
+    results["learning_curve"] = learning_curve.tolist()
+    results["test_error"] = test_error.tolist()
+
+    path = os.path.join(args.output_path, "results_best")
+    os.makedirs(path, exist_ok=True)
+
+    fname = os.path.join(path, "results_run_%d.json" % args.run_id)
+
+    fh = open(fname, "w")
+    json.dump(results, fh)
+    fh.close()
