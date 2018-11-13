@@ -5,8 +5,8 @@ import matplotlib.pyplot as plt
 path = './results_filters/'
 path2 = './results_learning_rates/'
 files = os.listdir(path)
-# for i in range(len(files)):
-#     name = files[i]
+for i in range(len(files)):
+    name = files[i]
 filters = [1,3,5,7]
 for i in range(len(files)):
     name = files[i]
