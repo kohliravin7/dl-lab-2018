@@ -46,3 +46,13 @@ plt.show()
 #     plot_curves(learning_curve, name, path2)
 #
 #
+
+path3 = './results_best/'
+json_data = open(path3 + 'results_run_0.json').read()
+data = json.loads(json_data)
+learning_curve = data['learning_curve']
+plt.plot(range(12), learning_curve)
+plt.xlabel('epochs')
+plt.ylabel('learning_curve')
+plt.title("Learning Curve for Best Configuration")
+plt.show()
