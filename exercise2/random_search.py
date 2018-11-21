@@ -44,6 +44,8 @@ class MyWorker(Worker):
         lr = config["learning_rate"]
         num_filters = config["num_filters"]
         batch_size = config["batch_size"]
+        filter_size = config["filter_size"]
+
         epochs = budget
         filter_size = config['filter_size']
         # TODO: train and validate your convolutional neural networks here

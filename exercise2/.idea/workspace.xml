@@ -1,7 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e36ccc31-3c61-4098-923f-0f377630fbc8" name="Default" comment="" />
+    <list default="true" id="e36ccc31-3c61-4098-923f-0f377630fbc8" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/../exercise3_CV_ML/code/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../exercise3_CV_ML/code/FCN.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../exercise3_CV_ML/code/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../exercise3_CV_ML/code/Test_Net.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../exercise3_CV_ML/code/Train_Net.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../exercise3_CV_ML/code/checkpoints/readme.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../exercise3_CV_ML/code/data/readme.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../exercise3_CV_ML/code/layers_slim.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../exercise3_CV_ML/code/logs/readme.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../exercise3_CV_ML/code/loss.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../exercise3_CV_ML/code/metrics.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../exercise3_CV_ML/code/nets_definition.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../exercise3_CV_ML/code/test/readme.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../exercise3_CV_ML/exercise3.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../exercise3_R_NR/carracing.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../exercise3_R_NR/drive_manually.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../exercise3_R_NR/exercise3.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../exercise3_R_NR/model.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../exercise3_R_NR/tensorboard_evaluation.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../exercise3_R_NR/test_agent.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../exercise3_R_NR/train_agent.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../exercise3_R_NR/utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Report 2.pages" beforeDir="false" afterPath="$PROJECT_DIR$/Report 2.pages" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Report 2.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report 2.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cnn_mnist.py" beforeDir="false" afterPath="$PROJECT_DIR$/cnn_mnist.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/random_search.py" beforeDir="false" afterPath="$PROJECT_DIR$/random_search.py" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -12,11 +41,11 @@
     <session id="148856815">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="5" />
+          <entry key="project.closed" value="6" />
           <entry key="project.open.time.4" value="3" />
-          <entry key="project.open.time.5" value="1" />
+          <entry key="project.open.time.5" value="2" />
           <entry key="project.open.time.6" value="2" />
-          <entry key="project.opened" value="6" />
+          <entry key="project.opened" value="7" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
@@ -45,14 +74,13 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/cnn_mnist.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="277">
-              <caret line="284" column="18" lean-forward="true" selection-start-line="284" selection-start-column="18" selection-end-line="284" selection-end-column="19" />
+            <state relative-caret-position="-2333">
+              <caret line="114" selection-start-line="114" selection-end-line="114" />
               <folding>
                 <element signature="e#0#37#0" expanded="true" />
-                <marker date="1542056658582" expanded="true" signature="5393:5398" ph="..." />
               </folding>
             </state>
           </provider>
@@ -61,8 +89,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/random_search.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1298">
-              <caret line="37" column="79" lean-forward="true" selection-start-line="37" selection-start-column="79" selection-end-line="37" selection-end-column="79" />
+            <state relative-caret-position="375">
+              <caret line="37" column="79" selection-start-line="37" selection-start-column="79" selection-end-line="37" selection-end-column="79" />
               <folding>
                 <element signature="e#0#14#0" expanded="true" />
               </folding>
@@ -84,11 +112,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/create_plots.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="345">
-              <caret line="23" lean-forward="true" selection-start-line="23" selection-end-line="23" />
+            <state relative-caret-position="420">
+              <caret line="28" column="20" lean-forward="true" selection-start-line="28" selection-start-column="20" selection-end-line="28" selection-end-column="20" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
                 <marker date="1542110369074" expanded="true" signature="53:55" ph="..." />
@@ -151,8 +179,8 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/random_search.py" />
-        <option value="$PROJECT_DIR$/cnn_mnist.py" />
         <option value="$PROJECT_DIR$/create_plots.py" />
+        <option value="$PROJECT_DIR$/cnn_mnist.py" />
       </list>
     </option>
   </component>
@@ -172,6 +200,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -198,7 +227,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -260,7 +288,7 @@
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1680" height="1050" extended-state="0" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.14163615" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.14285715" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -306,13 +334,13 @@
     <entry file="file://$PROJECT_DIR$/results_learning_rates/results_run_2.json">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/results_learning_rates/results_run_3.json">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/results_learning_rates/results_run_4.json">
+    <entry file="file://$PROJECT_DIR$/random_search.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="19" selection-start-column="19" selection-end-column="19" />
+        <state relative-caret-position="375">
+          <caret line="37" column="79" selection-start-line="37" selection-start-column="79" selection-end-line="37" selection-end-column="79" />
+          <folding>
+            <element signature="e#0#14#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -326,33 +354,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/results_filters/results_run_3.json">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/results_filters/results_run_4.json">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/random_search.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1298">
-          <caret line="37" column="79" lean-forward="true" selection-start-line="37" selection-start-column="79" selection-end-line="37" selection-end-column="79" />
-          <folding>
-            <element signature="e#0#14#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/cnn_mnist.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="277">
-          <caret line="284" column="18" lean-forward="true" selection-start-line="284" selection-start-column="18" selection-end-line="284" selection-end-column="19" />
-          <folding>
-            <element signature="e#0#37#0" expanded="true" />
-            <marker date="1542056658582" expanded="true" signature="5393:5398" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/results/results_run_0.json">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -360,13 +361,39 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/results_filters/results_run_4.json">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/results_filters/results_run_3.json">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/results_learning_rates/results_run_3.json">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/results_learning_rates/results_run_4.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="19" selection-start-column="19" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/create_plots.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="23" lean-forward="true" selection-start-line="23" selection-end-line="23" />
+        <state relative-caret-position="420">
+          <caret line="28" column="20" lean-forward="true" selection-start-line="28" selection-start-column="20" selection-end-line="28" selection-end-column="20" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
             <marker date="1542110369074" expanded="true" signature="53:55" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cnn_mnist.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2333">
+          <caret line="114" selection-start-line="114" selection-end-line="114" />
+          <folding>
+            <element signature="e#0#37#0" expanded="true" />
           </folding>
         </state>
       </provider>
