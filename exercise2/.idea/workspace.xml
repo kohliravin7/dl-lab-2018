@@ -1,36 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e36ccc31-3c61-4098-923f-0f377630fbc8" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/../exercise3_CV_ML/code/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../exercise3_CV_ML/code/FCN.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../exercise3_CV_ML/code/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../exercise3_CV_ML/code/Test_Net.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../exercise3_CV_ML/code/Train_Net.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../exercise3_CV_ML/code/checkpoints/readme.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../exercise3_CV_ML/code/data/readme.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../exercise3_CV_ML/code/layers_slim.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../exercise3_CV_ML/code/logs/readme.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../exercise3_CV_ML/code/loss.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../exercise3_CV_ML/code/metrics.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../exercise3_CV_ML/code/nets_definition.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../exercise3_CV_ML/code/test/readme.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../exercise3_CV_ML/exercise3.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../exercise3_R_NR/carracing.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../exercise3_R_NR/drive_manually.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../exercise3_R_NR/exercise3.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../exercise3_R_NR/model.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../exercise3_R_NR/tensorboard_evaluation.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../exercise3_R_NR/test_agent.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../exercise3_R_NR/train_agent.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../exercise3_R_NR/utils.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report 2.pages" beforeDir="false" afterPath="$PROJECT_DIR$/Report 2.pages" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Report 2.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/Report 2.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cnn_mnist.py" beforeDir="false" afterPath="$PROJECT_DIR$/cnn_mnist.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/random_search.py" beforeDir="false" afterPath="$PROJECT_DIR$/random_search.py" afterDir="false" />
-    </list>
+    <list default="true" id="e36ccc31-3c61-4098-923f-0f377630fbc8" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,7 +12,7 @@
     <session id="148856815">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="6" />
+          <entry key="project.closed" value="7" />
           <entry key="project.open.time.4" value="3" />
           <entry key="project.open.time.5" value="2" />
           <entry key="project.open.time.6" value="2" />

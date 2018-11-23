@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="8c26e2f5-2919-461b-b447-2bf550e2651b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/../../exercise2/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../exercise2/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FCN.py" beforeDir="false" afterPath="$PROJECT_DIR$/FCN.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nets_definition.py" beforeDir="false" afterPath="$PROJECT_DIR$/nets_definition.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
