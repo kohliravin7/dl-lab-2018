@@ -149,7 +149,7 @@ def FCN_Seg(self, is_training=True):
         # TODO (3.2) - Repeat TODO(3.1) now producing 160 output feature maps and fusing the upsampled features 
         # with the corresponding skip connection (DB3_skip_connection) through concatenation.
         refinement_up = TransitionUp_elu(refinement, 160, 2, 'config3/2x_2')
-        DB3_skip_connection = crop(DB3_skip_connection, refinement_up)
+        DB3_skip_connection = crop(refinement_up, DB3_skip_connection)
         x_crop = crop(refinement_up, DB3_skip_connection)
         x_connected = Concat_layers(x_crop, DB3_skip_connection)
         refinement = tc.layers.conv2d(inputs=x_connected, num_outputs=256, kernel_size=3, stride=1)
