@@ -93,7 +93,6 @@ def FCN_Seg(self, is_training=True):
         current_up5 = TransitionUp_elu(x, 120, 16, 'config1/16x')
 
         current_up5 = crop(current_up5, self.tgt_image)
-        current_up5 = crop(self.tgt_image, current_up5)
         End_maps_decoder1 = slim.conv2d(current_up5, self.N_classes, [1, 1], scope='Final_decoder') #(batchsize, width, height, N_classes)
         
         Reshaped_map = tf.reshape(End_maps_decoder1, (-1, self.N_classes))
@@ -149,7 +148,6 @@ def FCN_Seg(self, is_training=True):
         # TODO (3.2) - Repeat TODO(3.1) now producing 160 output feature maps and fusing the upsampled features 
         # with the corresponding skip connection (DB3_skip_connection) through concatenation.
         refinement_up = TransitionUp_elu(refinement, 160, 2, 'config3/2x_2')
-        DB3_skip_connection = crop(DB3_skip_connection, refinement_up)
         x_crop = crop(refinement_up, DB3_skip_connection)
         x_connected = Concat_layers(x_crop, DB3_skip_connection)
         refinement = tc.layers.conv2d(inputs=x_connected, num_outputs=256, kernel_size=3, stride=1)
