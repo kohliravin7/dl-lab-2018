@@ -109,7 +109,7 @@ def FCN_Seg(self, is_training=True):
         # but that also fuse the upsampled features with the corresponding skip connection (DB4_skip_connection)
         # through concatenation. After that use a convolution with kernel 3x3 to produce 256 output feature maps 
 
-        current_up5 = TransitionUp_elu(x, 120, 2, 'config2/2x')
+        current_up5 = TransitionUp_elu(x, 256,  2, 'config2/2x')
         DB4_skip_connection = crop(DB4_skip_connection, current_up5)
         x_crop = crop(current_up5, DB4_skip_connection)
         x_connected = Concat_layers(x_crop, DB4_skip_connection)
@@ -140,7 +140,7 @@ def FCN_Seg(self, is_training=True):
         # TODO (3.1) - implement the refinement block which upsample the data 2x like in configuration 1 
         # but that also fuse the upsampled features with the corresponding skip connection (DB4_skip_connection)
         # through concatenation. After that use a convolution with kernel 3x3 to produce 256 output feature maps 
-        current_up5 = TransitionUp_elu(x, 120, 2, 'config3/2x_1')
+        current_up5 = TransitionUp_elu(x, 256, 2, 'config3/2x_1')
         DB4_skip_connection = crop(DB4_skip_connection, current_up5)
         x_crop = crop(current_up5, DB4_skip_connection)
         x_connected = Concat_layers(x_crop, DB4_skip_connection)
@@ -151,7 +151,7 @@ def FCN_Seg(self, is_training=True):
         DB3_skip_connection = crop(refinement_up, DB3_skip_connection)
         x_crop = crop(refinement_up, DB3_skip_connection)
         x_connected = Concat_layers(x_crop, DB3_skip_connection)
-        refinement = tc.layers.conv2d(inputs=x_connected, num_outputs=256, kernel_size=3, stride=1)
+        refinement = tc.layers.conv2d(inputs=x_connected, num_outputs=160,  kernel_size=3, stride=1)
         # TODO (3.3) - incorporate a upsample function which takes the features from TODO (3.2)  
         # and produces 120 output feature maps which are 4x bigger in resolution than
         refinement_up = TransitionUp_elu(refinement, 120, 4, 'config3/4x_1')
