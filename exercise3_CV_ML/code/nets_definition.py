@@ -8,7 +8,7 @@ import tensorflow as tf
 import tensorflow.contrib.slim as slim
 from tensorflow.contrib.layers.python.layers import utils
 
-import tensorflow.contrib as tc 
+import tensorflow.contrib as tc  
 
 from layers_slim import *
 
